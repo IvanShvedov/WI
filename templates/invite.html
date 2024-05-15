@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="container u-max-full-width">
+		<div class="row head">
+			<div class="row top-head">
+				<div class="twelve columns u-max-full-width">
+					Сохрани дату 28.07.2024
+				</div>
+			</div>
+			<div class="row bot-head">
+				<div class="twelve columns u-max-full-width">
+					Екатерина<br>Никита
+				</div>
+			</div>
+		</div>
+		<div class="invite row">
+			<div class="row i1">
+				<div class="bigtext twelve columns u-max-full-width">
+					{% if invite[2] %}
+						Дорогая
+					{%else%}
+						Дорогой
+					{%endif%}
+					{{invite[1]}}!
+				</div>
+			</div>
+			<div class="row i2">
+				<div class="smalltext twelve columns u-max-full-width">
+					Мы очень хотим оказаться в окружении самых близких и дорогих для нас людей.<br>
+					С огромным удовольствием приглашаем тебя разделить с нами этот волнующий праздник - нашу свадьбу!
+				</div>
+			</div>
+		</div>
+		<div class="row locationimg">
+			<div class="twelve columns u-max-full-width loc">
+				Локация
+			</div>
+		</div>
+		<div class="bgloc">
+		<div class="row location">
+			<div class="twelve columns u-max-full-width loc1">
+				{{invite[3]}}
+			</div>
+		</div>
+		<div class="row location">
+			<div class="twelve columns u-max-full-width time">
+				Мы ждем тебя к {{invite[4]}}
+			</div>
+		</div>
+		</div>
+		<div class="row bot">
+			<div class="twelve columns u-max-full-width setin">
+				{% if invite[7] %}
+					Приглашение принято
+				{%else%}
+					<form method="post" action="{{url_for('invite_guest', invite_id=invite[6])}}">
+					<button type="submit" id="submitinvite">Принять приглашение</button>
+					</form>
+				{%endif%}
+			</div>
+		</div>
+		
+	</div>
+{% endblock %}

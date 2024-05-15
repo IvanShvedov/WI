@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+	<div id='admin'>
+    <h1>Список гостей</h1>
+	<form class="row" method="post" action="{{url_for('add')}}">
+    <fieldset class="pure-group">
+		<legend>Добавить гостя</legend>
+		<div class="row f">
+				<input type="text" name="guestname" class="pure-input-3" placeholder="ФИО" required=""/>
+		</div>
+		<div class="row f">
+				<label>
+				<input type="radio" name="sex" value="0" checked="" /> Мужской</label>
+				<label>
+				<input type="radio" name="sex" value="1" /> Женский</label>
+		</div>	
+		<div class="row f"
+			<label>
+			<input type="time" name="guest-time" id="guest-time"> Время</label>
+		</div>
+		<div class="row f">
+			<textarea class="" placeholder="Место" name="place"></textarea>
+		</div>
+	</fieldset>
+    <button type="submit" class="f">Добавить</button>
+	</form>
+	<table class="u-full-width">
+		<thead>
+			<tr>
+				<th>ФИО</th>
+				<th>Пол</th>
+				<th>Время</th>
+				<th>Место</th>
+				<th>Приглашение принято</th>
+				<th>Ссылка на приглашение</th>
+			</tr>
+		</thead>
+	<tbody>
+	{% for invite in invite_list %}		
+			<tr>
+			<td>
+				{{invite[1]}}
+			</td>
+			<td>
+				{% if invite[2] %}Женский{% else %}Мужской{%endif%}
+			</td>
+			<td>
+				{{invite[4]}}
+			</td>
+			<td>
+				{{invite[3]}}
+			</td>
+			<td>
+				{% if invite[7] %}Да{% else %}Нет{%endif%}
+			</td>
+			<td>
+				<a class="button button-primary" href="/guests/{{invite[6]}}">Перейти к приглашению</a>
+			</td>
+			<td>
+				<form method="post" action="{{url_for('delete_guest', invite_id=invite[0])}}">
+				<button type="submit">Удалить</button>
+				</form>
+			</td>
+			</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	</div>
+{% endblock %}
